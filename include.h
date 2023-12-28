@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include "define.h"
+#include "endian.c"
+#include "ture/branch.c"
+#include "ture/stack.c"
+#include "ture/heap.c"
+#include "ture/move.c"
+#include "ture/int.c"
+#include "ture/float.c"
+#include "ture/syscall/syscall.c"
+#include "init/init.c"
+#include "ture/step.c"
