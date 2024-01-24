@@ -1,12 +1,4 @@
 void run_load(ture_t *ture, char *filename) {
-    /* 
-        ture->ir will hold the address where argv ends after init_argv is called,
-        if it isn't in a "nice" spot, though, move it over a little 
-    */
-    uint64_t address = ture->ir;
-    uint64_t offset = 8-(address%8);
-    address +=  offset; ture->kr += offset; ture->ir += offset;
-
     // Read File into Memory 
     FILE *file = fopen(filename, "rb"); // Create file handle 
     if ( file == NULL ) { error("gyb unable to open file \"%s\"\n", filename); }
@@ -19,6 +11,7 @@ void run_load(ture_t *ture, char *filename) {
     fclose(file);
 
     // Then move the program into our heap 
-    ture->kr += file_size; ture->heap = realloc(ture->heap, ture->kr);
-    for(uint64_t i=0; i<file_size;i++){ ture->heap[address+i] = buffer[i]; }
+    ture->kr += file_size;  // eof is also end of heap, so this could be used instead of ture->ir for init location
+    ture->heap = realloc(ture->heap, ture->kr);
+    for(uint64_t i=0; i<file_size;i++){ ture->heap[i] = buffer[i]; }
 }
