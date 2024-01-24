@@ -5,10 +5,7 @@
 void boot(int argc, uint8_t **argv) {
     ture_t *ture = init_ture(); 
     run_load(ture, argv[1]);
-    ture_print_heap(ture);
     run_argv(ture, argc, argv);
-    ture_print_heap(ture);
-    ture_print_stack(ture);
     run_ture(ture); exit(0);
 }
 
