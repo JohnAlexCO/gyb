@@ -1,6 +1,6 @@
 #include "gyb.h"
 #define gyb_help "gyb interpreter\n    <input.gyb>    run the *.gyb file using the gyb interpreter\n    -v             print version information\n    -h             print this help dialog\n    -d             parse a *.gyb file and print out the disassembly\n"
-#define gyb_version "gyb 0.0.0\n"
+#define gyb_version "gyb 0.0.1\n"
 
 void boot(int argc, uint8_t **argv) {
     ture_t *ture = init_ture(); 
