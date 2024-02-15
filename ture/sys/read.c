@@ -20,7 +20,6 @@ void syscall_read(ture_t *ture) {
             fd_table[fd]->index = 0;
             fgets(fd_table[fd]->content, fd_stdbuffsize, stdin);
             fd_table[fd]->index =   strnlen(fd_table[fd]->content, fd_stdbuffsize);
-            fd_table[fd]->size =    fd_table[fd]->index;
             // then clone it into the buffer in our heap 
             for (int i=0; i<fd_table[fd]->index; i++){
                 ture_heap_set(ture, buffer+i, sizeof(uint8_t), fd_table[fd]->content[i]);
@@ -28,7 +27,7 @@ void syscall_read(ture_t *ture) {
             break;
         default:
             if(fd_table[fd] == NULL){error("syscall_read given invalid file descriptor %d\n", fd);}
-            FILE *fptr = fopen(fd_table[fd]->name, "rb");
+            //FILE *fptr = fopen(fd_table[fd]->name, "rb"); --- line is redundant
             uint64_t x = fd_table[fd]->index; file_read(ture, fd_table[fd], buffer, size);
             size = fd_table[fd]->index - x;     // update this so it can be used as our return value
             break;
